@@ -15,6 +15,9 @@ typeMap = {
 def convert_time(t):
     return datetime.fromtimestamp(t/1000).strftime('%Y.%m.%d')
 
+def convert_hours(t):
+    return datetime.fromtimestamp(t/1000).strftime('%H:%M')
+
 
 def write_sheet(player_name, f, console, typeInp, viewOnly=False):
     entry = []
@@ -26,10 +29,10 @@ def write_sheet(player_name, f, console, typeInp, viewOnly=False):
             val = file[console][index][1]
         except IndexError:
             val = 0
-        entry.append([convert_time(time[0]), '00:00', val, val, val, val])
+        entry.append([convert_time(time[0]), convert_hours(time[0]), val, val, val, val])
 
     if(viewOnly):
-        print(f"{console}------------------{console}-----------------{console}------------------{console}-----------------{console}")
+        print(f"{console}({typeInp})------------------{console}({typeInp})-----------------{console}({typeInp})------------------{console}({typeInp})-----------------{console}({typeInp})")
         print(np.matrix(entry))
         return
     
